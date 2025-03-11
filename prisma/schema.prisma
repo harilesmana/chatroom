@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id               Int     @id @default(autoincrement())
+  username         String  @unique
+  password         String
+  email            String  @unique
+  isVerified       Boolean @default(false)
+  verificationCode String?
+
+  messages Message[] // Hubungan ke Message
+  rooms    Room[]    @relation("UserRooms") // Hubungan ke Room
+}
+
+model Room {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  createdBy Int
+  messages  Message[]
+
+  users User[] @relation("UserRooms") // Hubungan balik ke User
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+
+  roomId Int
+  userId Int
+  room   Room @relation(fields: [roomId], references: [id]) // Hubungan balik ke Room
+  user   User @relation(fields: [userId], references: [id]) // Hubungan balik ke User
+}

@@ -1,0 +1,19 @@
+{
+  "name": "chat-platform",
+  "version": "1.0.0",
+  "main": "src/app.ts",
+  "scripts": {
+    "dev": "bun run src/app.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.5.0",
+    "bcryptjs": "^3.0.2",
+    "ejs": "^3.1.10",
+    "express-session": "^1.18.1",
+    "hono": "^4.7.4",
+    "nodemailer": "^6.10.0",
+    "prisma": "^6.5.0",
+    "serve-static": "^1.16.2",
+    "socket.io": "^4.8.1"
+  }
+}
